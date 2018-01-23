@@ -1,0 +1,59 @@
+body{
+    background-color: black;
+}
+td {
+    padding: 5px;
+    vertical-align: top;
+}
+.box {
+    color:white;
+    background-color:#262626;
+    margin-top: 50px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+}
+.grade{
+    float: right;
+    margin-top: 5px;
+    font-size: 35px;
+}
+h3 {
+    display: inline-blocK;
+}
+#profile{
+    text-align: center;
+    padding-top: 30px;
+    height: 413px;
+}
+.cal-heatmap-container rect.q1{
+    fill: #ff0000;
+}
+.cal-heatmap-container rect.q2{
+    fill: #ff8000;
+}
+.cal-heatmap-container rect.q3{
+    fill: #ffff00;
+}
+.cal-heatmap-container rect.q4{
+    fill: #80ff00;
+}
+.cal-heatmap-container rect.q5{
+    fill: #00ff00;
+}
+.cal-heatmap-container .graph-rect {
+    fill: black;
+}
+.search-bar{
+    text-align: center;
+    margin-top: 10px;
+}
+form label, form input{
+    margin-right: 10px;
+}
+label{
+    color:white;
+}
+form select, form input{
+    height: 30px;
+    color: black;
+}

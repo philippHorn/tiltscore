@@ -1,0 +1,24 @@
+.container{
+    text-align: center;
+}
+.container div{
+    margin-top: 22%;
+}
+form label, form input{
+    margin-right: 10px;
+}
+
+form select, form input{
+    height: 30px;
+    color: black;
+}
+.errorlist li{
+    color:red;
+}
+.alert{
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+      {{ form.non_field_errors.as_text |cut:"* "}}
+    </div>
+    {% endif %}
+    <div class="search-bar">
+        <span class="left-text"><a href="/">Tiltscore</a></span>
+        <form method="post" class="search-bar" action="{{ form.url }}">
+            {% csrf_token %}
+            {% for field in form %}
+            {{ field }}
+            {% endfor %}
+            <input type="submit" value="Send" class="btn btn-default btn-sm">
+        </form>
+    </div>
+{% endblock %}

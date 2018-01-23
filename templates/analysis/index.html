@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{{ block.super }}
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+{% endblock %}
+{% block content %}
+    {% if additional_error %}
+        <div class="alert alert-danger">
+          {{ additional_error}}
+        </div>
+    {% endif %}
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ form.non_field_errors.as_text |cut:"* " }}
+        </div>
+    {% endif %}
+<div class="container">
+    <div>
+        <h2>Enter your name to find out how much you tilt</h2>
+        <form method="post" class="search-area">
+                {% csrf_token %}
+                {% for field in form %}
+                {{ field }}
+                {% endfor %}
+            <input type="submit" value="Send" class="btn btn-default btn-sm">
+        </form>
+    </div>
+</div>
+{% endblock %}

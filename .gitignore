@@ -1,0 +1,4 @@
+__pycache__/
+tilt/local_settings.py
+.idea
+.coverage

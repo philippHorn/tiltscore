@@ -1,0 +1,26 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 46px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 12px;
+}
+.search-bar{
+    text-align: right;
+    background-color: #f5f5ef;
+    padding-right: 1%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.search-bar input, .search-bar select{
+}
+.search-bar a{
+    color: black;
+}
+.left-text{
+    float: left;
+    font-size: 21px;
+    margin: 4px 0px 0 6px;
+}

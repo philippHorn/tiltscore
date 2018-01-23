@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    {{ block.super }}
+    <script type="text/javascript">
+        var progress_url = "{% url "progress" calc_id=calc_id %}";
+        var result_url = "{% url "result" calc_id=calc_id %}";
+    </script>
+    <script type="text/javascript" src="{% static 'wait.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'wait.css' %}" />
+{% endblock %}
+{% block content %}
+<div class=container>
+    <div>
+        <h2>Please wait while we calculate your result...</h2>
+        <h2 id="percentage">0%</h2>
+    </div>
+</div>
+{% endblock %}

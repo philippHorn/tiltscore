@@ -1,0 +1,69 @@
+{% extends 'base_with_header.html' %}
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script type="text/javascript" src="{% static 'cal-heatmap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'cal-heatmap.css' %}" />
+    <link rel="stylesheet" href="{% static 'result.css' %}" />
+{% endblock %}
+
+{% block content %}
+    <div class="container result">
+        <div class="center">
+            <div class="row">
+                <h1 class="center">{{ summoner.name }}</h1>
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="row">
+                {{ heatmap | safe }}
+            </div>
+        </div>
+        <div class="center">
+            <div class="row">
+                <table class="table">
+                    <tr>
+                        <td>total games analysed</td>
+                        <td>{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <td>total winrate</td>
+                        <td>{{ analysis.winrate | floatformat:3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Winrate after winning one game</td>
+                        <td>{{ analysis.winrate_after_win | floatformat:3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Winrate after loosing one game</td>
+                        <td>{{ analysis.winrate_after_loss | floatformat:3 }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="center">
+            <div class="row">
+                <h2 class="center">{{ summoner.tilt_rank | floatformat }} / 100</h2>
+            </div>
+            <div class="row">
+                <p class="center">Your tilting
+                {% if summoner.tilt_rank < 20 %}
+                    much less often
+                {% elif summoner.tilt_rank < 40 %}
+                   less often
+                {% elif summoner.tilt_rank < 60 %}
+                    just as often
+                {% elif summoner.tilt_rank < 80 %}
+                    more often
+                {% else %}
+                    much more often
+                {% endif %}
+                than the average player.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
