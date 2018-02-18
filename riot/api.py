@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from riotwatcher import RiotWatcher
 from django.conf import settings
 
+from riot.constants import RELEVANT_QUEUES
 from riot.models import Summoner, Match
 
 _api = RiotWatcher(settings.RIOT_API_KEY)
@@ -93,7 +94,10 @@ def get_matchlist(summoner, begin_index, end_index):
     )
 
 
-def get_latest_matches(summoner, limit=settings.MATCH_LIMIT):
+def get_latest_matches(
+        summoner,
+        limit=settings.MATCH_LIMIT,
+        queues=RELEVANT_QUEUES):
     """stream matches from summoner till limit is reached"""
 
     end_index = 0
@@ -104,7 +108,8 @@ def get_latest_matches(summoner, limit=settings.MATCH_LIMIT):
             end_index=end_index + settings.MATCH_LIST_LIMIT,
         )
         yield from (get_match(summoner, match['gameId'])
-                    for match in matches["matches"] if match)
+                    for match in matches["matches"]
+                    if match and match["queue"] in queues)
         end_index = matches["endIndex"]
 
         if end_index >= limit or end_index >= matches["totalGames"]:
