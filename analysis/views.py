@@ -25,10 +25,11 @@ def index(request):
             try:
                 calc = Calculation.objects.filter(
                     summoner=summoner,
-                    finished=True,
                     created__gt=datetime.now() - timedelta(days=settings.CALC_DAYS)
                 ).latest("created")
-                return redirect("result", calc_id=calc.pk)
+                if calc.finished:
+                    return redirect("result", calc_id=calc.pk)
+                return redirect("wait", calc_id=calc.pk)
             except Calculation.DoesNotExist:
                 calc = Calculation.objects.create(summoner=summoner, finished=False)
                 calculate_score.delay(summoner.pk, calc.pk)
