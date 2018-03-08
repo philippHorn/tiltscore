@@ -102,11 +102,14 @@ def get_latest_matches(
 
     end_index = 0
     while True:
-        matches = get_matchlist(
-            summoner,
-            begin_index=end_index,
-            end_index=end_index + settings.MATCH_LIST_LIMIT,
-        )
+        try:
+            matches = get_matchlist(
+                summoner,
+                begin_index=end_index,
+                end_index=end_index + settings.MATCH_LIST_LIMIT,
+            )
+        except requests.exceptions.HTTPError:
+            break
         yield from (get_match(summoner, match['gameId'])
                     for match in matches["matches"]
                     if match and match["queue"] in queues)

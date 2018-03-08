@@ -16,7 +16,7 @@
                 <h1 class="center">{{ summoner.name }}</h1>
             </div>
         </div>
-
+    {% if analysis %}
         <div class="center">
             <div class="row">
                 {{ heatmap | safe }}
@@ -65,5 +65,8 @@
                 </p>
             </div>
         </div>
+    {% else %}
+        <p>There was no information availible for this summoner.</p>
+    {% endif %}
     </div>
 {% endblock %}

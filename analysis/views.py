@@ -60,19 +60,15 @@ def progress(request, calc_id):
 def result(request, calc_id):
     calculation = Calculation.objects.get(pk=calc_id)
     matches = Match.objects.filter(summoner=calculation.summoner_id)
-    heatmap = CalendarHeatMap(matches)
+    context = {"form": SummonerNameForm(), "summoner": calculation.summoner}
+    if matches:
+        context["total"] = matches.count()
+        context["heatmap"] = CalendarHeatMap(matches)
+        context["analysis"] = StreakCalculator(matches)
+        calculation.summoner.score = context["analysis"].score
+        calculation.summoner.save()
 
-    analysis = StreakCalculator(matches)
-    calculation.summoner.score = analysis.score
-    calculation.summoner.save()
-
-    return render(request, 'analysis/result.html', {
-        "form": SummonerNameForm(),
-        "heatmap": heatmap,
-        "analysis": analysis,
-        "summoner": calculation.summoner,
-        "total": matches.count(),
-    })
+    return render(request, 'analysis/result.html', context)
 
 
 class SummonerField(forms.RegexField):
