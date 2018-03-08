@@ -83,6 +83,8 @@ class SummonerNameForm(forms.Form):
     region = forms.ChoiceField(choices=settings.REGIONS, initial='euw1')
 
     def clean(self):
+        if 'summoner_name' not in self.cleaned_data:
+            raise ValidationError("Please enter a summoner name")
         try:
             get_summoner(
                 self.cleaned_data['summoner_name'], self.cleaned_data['region']
