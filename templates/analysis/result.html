@@ -49,7 +49,8 @@
                 <h2 class="center">{{ summoner.tilt_rank | floatformat }} / 100</h2>
             </div>
             <div class="row">
-                <p class="center">Your tilting
+                <p class="center tooltiped">
+                    Your tilting
                 {% if summoner.tilt_rank < 20 %}
                     much less often
                 {% elif summoner.tilt_rank < 40 %}
@@ -61,7 +62,11 @@
                 {% else %}
                     much more often
                 {% endif %}
-                than the average player.
+                than the average player. &#9432;
+                <span class="tooltiptext">
+                    The score is calculated by taking the difference between the two
+                    winrates and comparing the result between players.
+                </span>
                 </p>
             </div>
         </div>
