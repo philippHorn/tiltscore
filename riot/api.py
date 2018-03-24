@@ -108,8 +108,10 @@ def get_latest_matches(
                 begin_index=end_index,
                 end_index=end_index + settings.MATCH_LIST_LIMIT,
             )
-        except requests.exceptions.HTTPError:
-            break
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 404:
+                break
+            raise
         yield from (get_match(summoner, match['gameId'])
                     for match in matches["matches"]
                     if match and match["queue"] in queues)
