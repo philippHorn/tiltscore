@@ -7,5 +7,5 @@ RANKED_3V3 = 470
 
 RELEVANT_QUEUES = [
     RANKED_SOLO,
-    FLEX_5V5,
+    #FLEX_5V5,
 ]

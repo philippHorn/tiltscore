@@ -4,14 +4,6 @@
 .container div{
     margin-top: 22%;
 }
-form label, form input{
-    margin-right: 10px;
-}
-
-form select, form input{
-    height: 30px;
-    color: black;
-}
 .errorlist li{
     color:red;
 }

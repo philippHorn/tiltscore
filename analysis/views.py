@@ -73,6 +73,10 @@ def result(request, calc_id):
     return render(request, 'analysis/result.html', context)
 
 
+def more_info(request):
+    return render(request, 'analysis/info.html', {"form": SummonerNameForm()})
+
+
 class SummonerField(forms.RegexField):
     def to_python(self, value):
         return value.lower().replace(" ", "")

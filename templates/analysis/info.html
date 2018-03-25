@@ -1,0 +1,65 @@
+{% extends 'base_with_header.html' %}
+{% load static %}
+
+{% block content %}
+<div class=container>
+    <div>
+        <h2>How does this work?</h2>
+    </div>
+    <div>
+        <p>
+            We would expect a completely neutral player in an unbiased environment
+            to have a winrate of exactly the same winrate, whether the last games
+            were won or lost.
+            But winning or loosing a game causes the players to gain or loose MMR,
+            therefor winning a game can decrease your chance of winning and loosing
+            a game can increase your chance of winning.
+            To account for that we compare you to others players.
+            If you win more often after winning and you loose
+            more often after loosing compared to the average player, that can be taken as an
+            indication that you
+            <a href="https://en.wikipedia.org/wiki/Tilt_(poker)">tilt</a>.
+
+        </p>
+    </div>
+    <div>
+        <h2>How accurate is the score?</h2>
+    </div>
+    <div>
+        <p>
+            The score is fun statistic that can mean something, but it should not be taken as
+            very accurate.
+            We don't analyze enough games to safely rule out chance.
+            There can also be other factors that influence
+            your winrate after winning/loosing. Maybe you are more likely to get your main
+            role or your main champion at a lower MMR. Maybe you take a long break after
+            loosing so your mood does not influence the next game. Maybe your regular duo-partner
+            tilts ;)
+            Also there is a bias in the players we compare you to. The players that are entered
+            into this website might not represent the average player at all.
+            The real "tilters" might never enter their names in here, or people might enter a
+            lot of "tilters" in here to confirm there suspicions.
+        </p>
+    </div>
+    <div>
+        <h2>How does the math work?</h2>
+    </div>
+    <div>
+        <p>
+            Take the winrate after winning one game minus the winrate after loosing one game.
+            Out of the resulting scores we compute the
+            <a href="https://en.wikipedia.org/wiki/Percentile_rank">Percentile rank</a>.
+            So if you get a score of 100, you have the highest score out of all players in our database.
+            If you get a score of 50, then 50% of players in our database have a lower score than you.
+        </p>
+    </div>
+    <div>
+        <h2>Which game types are used?</h2>
+    </div>
+    <div class="last">
+        <p>
+            At the moment we are only taking your solo ranked games into account.
+        </p>
+    </div>
+</div>
+{% endblock %}

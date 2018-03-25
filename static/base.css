@@ -13,14 +13,23 @@
     padding-right: 1%;
     padding-top: 3px;
     padding-bottom: 3px;
+    margin-bottom: 15px;
+    height: 43px;
 }
 .search-bar input, .search-bar select{
 }
 .search-bar a{
     color: black;
+    margin-bottom: 15px;
 }
-.left-text{
+.header-text{
     float: left;
     font-size: 21px;
-    margin: 4px 0px 0 6px;
+    margin: 4px 13px 0 6px;
+}
+.search-bar select, .search-bar input {
+    height: 30px;
+}
+.last {
+    margin-bottom: 70px !important;
 }

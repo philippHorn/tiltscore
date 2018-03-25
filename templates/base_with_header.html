@@ -7,7 +7,12 @@
     </div>
     {% endif %}
     <div class="search-bar">
-        <span class="left-text"><a href="/">Tiltscore</a></span>
+        <span class="header-text"><a href="/">
+            Tiltscore</a>
+        </span>
+        <span class="header-text">
+            <a href="{% url 'more_info' %}">How does this work?</a>
+        </span>
         <form method="post" class="search-bar" action="{{ form.url }}">
             {% csrf_token %}
             {% for field in form %}
