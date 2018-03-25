@@ -52,8 +52,10 @@ def wait(request, calc_id):
 @csrf_exempt
 def progress(request, calc_id):
     calc = Calculation.objects.get(pk=calc_id)
-    progress = 100 if calc.finished \
-        else calc.count / settings.MATCH_LIMIT * 100
+    if calc.finished:
+        progress = 100
+    else:
+        progress = min(calc.count / settings.MATCH_LIMIT * 100, 100)
     return JsonResponse({"progress": round(progress, 1)})
 
 
