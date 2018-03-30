@@ -13,6 +13,17 @@ from riot.models import Summoner, Match
 
 _api = RiotWatcher(settings.RIOT_API_KEY)
 
+SUMMONER_MAPPING = {
+    "name": "name",
+    "riot_id": "id",
+    "account_id": "accountId",
+}
+PARTICIPANT_MAPPING = {
+    "name": "summonerName",
+    "riot_id": "summonerId",
+    "account_id": "currentAccountId",
+}
+
 
 def db_cache(db_getter):
     def decorator(func):
@@ -47,12 +58,15 @@ def catch_errors(func):
 @catch_errors
 def get_summoner(name, region):
     summoner_json = _api.summoner.by_name(region, name)
+    return create_summoner(summoner_json, SUMMONER_MAPPING, region)
 
+
+def create_summoner(summoner_json, mapping, region):
     return Summoner.objects.update_or_create(
         region=region,
-        name=summoner_json['name'],
-        defaults={"riot_id": summoner_json['id']},
-        account_id=summoner_json["accountId"],
+        name=summoner_json[mapping['name']],
+        defaults={"riot_id": summoner_json[mapping['riot_id']]},
+        account_id=summoner_json[mapping["account_id"]],
     )[0]
 
 
@@ -75,6 +89,8 @@ def get_match(summoner, match_id):
                                 if p["participantId"] == participant_id)
     except StopIteration:
         raise ValueError("Summoner does not belong to match")
+    for json_ in match_json["participantIdentities"]:
+        create_summoner(json_["player"], PARTICIPANT_MAPPING, summoner.region)
     return Match.objects.create(
         summoner=summoner,
         riot_id=match_json["gameId"],
