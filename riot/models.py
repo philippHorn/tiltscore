@@ -40,6 +40,8 @@ class Match(models.Model):
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     queue_type = models.CharField(max_length=30)
     winner = models.BooleanField()
+    role = models.CharField(max_length=30, null=True)
+    lane = models.CharField(max_length=30, null=True)
 
     def __str__(self):
         return f"{self.riot_id} of {self.summoner.name}"

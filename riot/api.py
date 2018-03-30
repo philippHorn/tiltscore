@@ -97,6 +97,8 @@ def get_match(summoner, match_id):
         time=datetime.fromtimestamp(match_json["gameCreation"] / 1000, tz=timezone.utc),
         queue_type=match_json["gameType"],
         winner=participant_json["stats"]["win"],
+        role=participant_json["timeline"].get("role", None),
+        lane=participant_json["timeline"].get("lane", None),
     )
 
 
