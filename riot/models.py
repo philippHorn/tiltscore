@@ -30,7 +30,7 @@ class Summoner(models.Model):
         return Summoner.objects.raw(raw_query)[0].rank * 100
 
     class Meta:
-        unique_together = ('name', 'region')
+        unique_together = ('riot_id', 'region')
 
 
 class Match(models.Model):

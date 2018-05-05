@@ -63,10 +63,12 @@ def get_summoner(name, region):
 
 def create_summoner(summoner_json, mapping, region):
     return Summoner.objects.update_or_create(
+        riot_id=summoner_json[mapping['riot_id']],
         region=region,
-        name=summoner_json[mapping['name']],
-        defaults={"riot_id": summoner_json[mapping['riot_id']]},
-        account_id=summoner_json[mapping["account_id"]],
+        defaults={
+            "account_id": summoner_json[mapping["account_id"]],
+            "name": summoner_json[mapping['name']],
+        }
     )[0]
 
 
@@ -103,7 +105,7 @@ def get_match(summoner, match_id):
 
 
 @catch_errors
-def get_matchlist(summoner, begin_index, end_index):
+def get_matchlist(summoner, begin_index=0, end_index=100):
     return _api.match.matchlist_by_account(
         summoner.region,
         summoner.account_id,
