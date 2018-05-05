@@ -16,11 +16,11 @@ long_win_list = [
 class AnalysisTestCase(TestCase):
 
     def test_streaks(self):
-        wins, losses = StreakCalculator._count_wins(win_list)
-        self.assertEquals(wins, {2: 1, 1: 1})
-        self.assertEquals(losses, {2: 1})
+        result = StreakCalculator._count_wins(win_list)
+        self.assertEquals(result[True], {True: 1, False: 1})
+        self.assertEquals(result[False], {True: 1, False: 1})
 
     def test_streaks_long(self):
-        wins, losses = StreakCalculator._count_wins(long_win_list)
-        self.assertEquals(wins, {2: 3, 1: 3, 6: 1})
-        self.assertEquals(losses, {1: 4, 2: 2})
+        result = StreakCalculator._count_wins(long_win_list)
+        self.assertEquals(result[True], {True: 8, False: 6})
+        self.assertEquals(result[False], {True: 6, False: 2})
